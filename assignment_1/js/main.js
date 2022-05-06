@@ -22,6 +22,15 @@ function getArticle(){
     el.appendChild(art_tag);
 }
 
+function getLink(){
+    let links_div = document.getElementById('links');
+    let ul_tag = links_div.getElementsByTagName("a")[2];
+    // adding a new href
+    ul_tag.setAttribute('href', 'https://google.com');
+    // adding a target attribute
+    ul_tag.setAttribute('target', '_blank');
+}
+
 function main(){
     let page_title = document.getElementsByTagName("title")[0];
 
@@ -35,6 +44,7 @@ function main(){
         page_title.textContent = "Webprogramming (LIX018P05) - Index";
         // Adding new element article to index.html
         getArticle();
+        getLink()
     }
     else {
         page_title.textContent = " Webprogramming (LIX018P05) - Second";
