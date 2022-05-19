@@ -1,10 +1,32 @@
 function validateForm(){
 
+    $('#name').keyup(function () {
+        checkName();
+    });
+    $('#age').keyup(function () {
+        checkAge();
+    });
+    $('#city').keyup(function () {
+        checkCity();
+    });
+    $('#e-mail').keyup(function () {
+        checkEmail();
+    });
+    $('#ph-number').keyup(function () {
+        checkNumber();
+    });
+
+    if (checkName() && checkAge() && checkCity() && checkEmail() && checkNumber)
+    {
+        return true
+    }
+    else
+    {
+        return false
+    }
 }
 
 function writeFormData(){
-
-    let form_data = [];
 
     let curr_data = {
         name: $('#name').val(),
@@ -13,21 +35,22 @@ function writeFormData(){
         email: $('#e-mail').val(),
         ph_number: $('#ph-number').val()
     }
-
-    form_data.push(curr_data);
-    //document.forms[0].reset(); // to clear the form for the further entries
-    //document.getElementById("arrPrint").innerHTML = JSON.stringify(form_data, null, 2);
 }
 
 function checkName(){
     let name_input = $('#name');
     let cur_val = name_input.val();
     let name_regex = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-    if (cur_val.match(name_regex) && cur_val !== ''){
-        name_input.removeClass('is-invalid');
+    if (cur_val.match(name_regex)){
         name_input.addClass('is-valid');
+        name_input.removeClass('is-invalid');
         return true;
-    } else{
+    }
+    else if (cur_val === ''){
+        name_input.removeClass('is-valid');
+        name_input.removeClass('is-invalid');
+    }
+    else{
         name_input.removeClass('is-valid');
         name_input.addClass('is-invalid');
         return false;
@@ -42,7 +65,12 @@ function checkAge(){
         name_input.removeClass('is-invalid');
         name_input.addClass('is-valid');
         return true;
-    } else{
+    }
+    else if (cur_val === ''){
+        name_input.removeClass('is-valid');
+        name_input.removeClass('is-invalid');
+    }
+    else{
         name_input.removeClass('is-valid');
         name_input.addClass('is-invalid');
         return false;
@@ -57,7 +85,12 @@ function checkCity(){
         name_input.removeClass('is-invalid');
         name_input.addClass('is-valid');
         return true;
-    } else{
+    }
+    else if (cur_val === ''){
+        name_input.removeClass('is-valid');
+        name_input.removeClass('is-invalid');
+    }
+    else{
         name_input.removeClass('is-valid');
         name_input.addClass('is-invalid');
         return false;
@@ -73,7 +106,12 @@ function checkEmail(){
         name_input.removeClass('is-invalid');
         name_input.addClass('is-valid');
         return true;
-    } else{
+    }
+    else if (cur_val === ''){
+        name_input.removeClass('is-valid');
+        name_input.removeClass('is-invalid');
+    }
+    else{
         name_input.removeClass('is-valid');
         name_input.addClass('is-invalid');
         return false;
@@ -88,7 +126,12 @@ function checkNumber(){
         name_input.removeClass('is-invalid');
         name_input.addClass('is-valid');
         return true;
-    } else{
+    }
+    else if (cur_val === ''){
+        name_input.removeClass('is-valid');
+        name_input.removeClass('is-invalid');
+    }
+    else{
         name_input.removeClass('is-valid');
         name_input.addClass('is-invalid');
         return false;
@@ -121,10 +164,12 @@ function checkFilledData(){
    }
 
     if (valid === false){
-        alert("error please fill all fields!");
+        let content = document.getElementById("form-alert");
+        content.style.display = 'block';
+        return false
     }
     else {
-        alert('valid');
+        return true
     }
 
 }
@@ -152,38 +197,37 @@ function addData(){
 }
 
 $(function() {
-    //TODO: show the alert form when one of the fields is not filled
-
-    $('#name').keyup(function () {
-        checkName();
-    });
-    $('#age').keyup(function () {
-        checkAge();
-    });
-    $('#city').keyup(function () {
-        checkCity();
-    });
-    $('#e-mail').keyup(function () {
-        checkEmail();
-    });
-    $('#ph-number').keyup(function () {
-        checkNumber();
-    });
-    /*
-    if (checkName() && checkAge() && checkCity() && checkEmail() && checkNumber){
-        addData();
-    } */
+    validateForm();
     $('#submit-bt').click(function() {
-        writeFormData();
-        checkFilledData();
-        addData();
+        if (checkFilledData()){
+            writeFormData();
+            addData();
+            $('#form-alert').hide();
+        }
     })
     $('#erase-bt').click(function() {
         eraseData();
     })
 
-    $('#contact-tab').on("click", function() {
-        //TODO: show info and hide links (in html)
-        alert(document.getElementById("contact").innerHTML)
+    $('#contact-tab').click(function() {
+        // adding active classes to contact tab
+        $(".tab-pane"). addClass("active");
+        $(".nav-link").addClass("active");
+
+        // disabling active classes by links
+        $("#links").removeClass("active");
+        $("#link-tab").removeClass("active");
+
+    })
+
+    $('#link-tab').click(function() {
+
+        // adding active classes to links tab
+        $(".tab-pane"). addClass("active");
+        $(".nav-link").addClass("active");
+
+        // disabling active classes by contact tab
+        $("#contact").removeClass("active");
+        $("#contact-tab").removeClass("active");
     })
 });
