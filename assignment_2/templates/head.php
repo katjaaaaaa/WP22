@@ -13,7 +13,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">WP21</a>
+                <a class="navbar-brand" href="#">WP22</a>
                 <ul class="navbar-nav mr-auto">
                     <?php $active = $navigation["active"]; ?>
                     <?php foreach ($navigation["items"] as $title => $url){
@@ -27,6 +27,22 @@
                         </li>
                         <?php } ?>
                     <?php } ?>
+                    <script>
+                        $(function() {
+
+                            let links_list = [
+                                "google.com",
+                                "google.com",
+                                "google.com",
+                                "google.com"
+                            ];
+
+                            ('.navbar-nav mr-auto').append("<ul id='new_list'></ul>");
+                            for (let i = 0; i < links_list.length; i++) {
+                                $("#new_list").append("<li>"+links_list[i]+"</li>");
+                            }
+                        });
+                    </script>
                 </ul>
             </nav>
         </header>

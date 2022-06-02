@@ -1,0 +1,11 @@
+.wp-row {
+    margin: 100px 0 100px 0;
+}
+
+#form-content {
+    display: none;
+}
+
+#form-alert {
+    display: none;
+}
